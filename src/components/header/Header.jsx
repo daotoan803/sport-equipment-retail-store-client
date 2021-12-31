@@ -1,13 +1,11 @@
 import { FcMenu } from 'react-icons/fc';
-// import { MdOutlineAccountCircle } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import SearchBox from './../form/SearchBox';
 import NavLinks from './NavLinks';
-import AccountBtn from '../button/AccountBtn';
-import CartBtn from './../button/CartBtn';
 import Logo from './../Logo';
+import AuthButtonsGroup from './AuthButtonsGroup';
 
-const Header = () => {
+const Header = ({ isLoggedIn, toggleLoginModal }) => {
   const [collapseNavbar, setCollapseNavbar] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -25,15 +23,15 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 left-0 w-screen lg:flex justify-between items-center shadow-lg md:px-0 lg:px-20">
+    <header className="sticky z-10 top-0 left-0 w-screen bg-white lg:flex justify-between items-center shadow-lg md:px-0 lg:px-20">
       <div className="flex justify-between px-3 py-4 lg:px-0  ">
         <Logo />
         {collapseNavbar && (
           <div className="flex gap-2">
-            <div className="flex gap-3">
-              <AccountBtn />
-              <CartBtn />
-            </div>
+            <AuthButtonsGroup
+              isLoggedIn={isLoggedIn}
+              toggleLoginModal={toggleLoginModal}
+            />
             <button
               onClick={toggleNavbar}
               className="rounded shadow-sm px-1 py-0 hover:ring ring-primary lg:hidden">
@@ -45,7 +43,11 @@ const Header = () => {
       {(openNavbar || !collapseNavbar) && (
         <>
           <SearchBox />
-          <NavLinks collapseNavbar={collapseNavbar} />
+          <NavLinks
+            toggleLoginModal={toggleLoginModal}
+            collapseNavbar={collapseNavbar}
+            isLoggedIn={isLoggedIn}
+          />
         </>
       )}
     </header>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import CartBtn from '../button/CartBtn';
-import AccountBtn from './../button/AccountBtn';
+import AuthButtonsGroup from './AuthButtonsGroup';
 
-const NavLinks = ({ collapseNavbar }) => {
+const NavLinks = ({ collapseNavbar, isLoggedIn, toggleLoginModal }) => {
   return (
     <>
       <div className="dropdown uppercase flex flex-col lg:flex-row">
@@ -12,10 +11,10 @@ const NavLinks = ({ collapseNavbar }) => {
         <NavLinkItem to="/contact" name="Liên hệ" />
       </div>
       {!collapseNavbar && (
-        <div className="gap-3 flex">
-          <AccountBtn />
-          <CartBtn />
-        </div>
+        <AuthButtonsGroup
+          isLoggedIn={isLoggedIn}
+          toggleLoginModal={toggleLoginModal}
+        />
       )}
     </>
   );
