@@ -17,9 +17,19 @@ function App() {
     setOpenLoginModal(!openLoginModal);
   };
 
+  const onLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setOpenLoginModal(false);
+  };
+
   return (
     <>
-      {openLoginModal && <LoginModal toggleLoginModal={toggleLoginModal} />}
+      {openLoginModal && !isLoggedIn && (
+        <LoginModal
+          toggleLoginModal={toggleLoginModal}
+          onLoginSuccess={onLoginSuccess}
+        />
+      )}
       <Header isLoggedIn={isLoggedIn} toggleLoginModal={toggleLoginModal} />
       <Routes>
         <Route path={'/'} exact element={<h1>Hello world</h1>} />

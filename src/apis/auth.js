@@ -3,7 +3,7 @@ const auth = (() => {
 
   const isLoggedIn = () => accessKey !== null;
   const logIn = async (email, password) => {
-    const response = await fetch('/login', {
+    const response = await fetch('/user/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/json',
