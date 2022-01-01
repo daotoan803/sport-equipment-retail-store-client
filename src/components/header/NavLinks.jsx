@@ -7,6 +7,8 @@ const NavLinks = ({
   isLoggedIn,
   toggleLoginModal,
   toggleSignupModal,
+  logout,
+  toggleCart
 }) => {
   return (
     <div className="lg:flex gap-2">
@@ -18,6 +20,8 @@ const NavLinks = ({
           isLoggedIn={isLoggedIn}
           toggleLoginModal={toggleLoginModal}
           toggleSignupModal={toggleSignupModal}
+          logout={logout}
+          toggleCart={toggleCart}
         />
       )}
     </div>

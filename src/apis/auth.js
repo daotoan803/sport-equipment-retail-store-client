@@ -1,7 +1,7 @@
 const auth = (() => {
-  let accessKey = localStorage.getItem('token') || null;
+  let token = localStorage.getItem('token') || null;
 
-  const isLoggedIn = () => accessKey !== null;
+  const isLoggedIn = () => token !== null;
 
   const getTokenAndStore = (responseBody) => {
     const token = responseBody.token;
@@ -35,14 +35,19 @@ const auth = (() => {
       body: JSON.stringify({ name, email, dob, gender, password }),
     });
     const data = await response.json();
-    
+
     if (response.status === 200) {
-      getTokenAndStore(data)
+      getTokenAndStore(data);
     }
     return { status: response.status, data };
   };
 
-  return { isLoggedIn, logIn, signup };
+  const logout = () => {
+    token = null;
+    localStorage.removeItem('token');
+  };
+
+  return { isLoggedIn, logIn, signup, logout };
 })();
 
 export default auth;

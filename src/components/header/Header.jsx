@@ -12,7 +12,7 @@ const openMenuVariants = {
   exit: { height: 0, overflow: 'hidden' },
 };
 
-const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
+const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal, logout,toggleCart }) => {
   const [navbarIsCollapsed, setNavbarIsCollapsed] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -39,6 +39,8 @@ const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
               isLoggedIn={isLoggedIn}
               toggleLoginModal={toggleLoginModal}
               toggleSignupModal={toggleSignupModal}
+              logout={logout}
+              toggleCart={toggleCart}
             />
             <button
               onClick={toggleNavbar}
@@ -51,7 +53,7 @@ const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
       <AnimatePresence>
         {(openNavbar || !navbarIsCollapsed) && (
           <motion.div
-            className="lg:flex justify-betweens"
+            className="lg:flex justify-betweens gap-10"
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -62,6 +64,8 @@ const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
               toggleSignupModal={toggleSignupModal}
               navbarIsCollapsed={navbarIsCollapsed}
               isLoggedIn={isLoggedIn}
+              logout={logout}
+              toggleCart={toggleCart}
             />
           </motion.div>
         )}

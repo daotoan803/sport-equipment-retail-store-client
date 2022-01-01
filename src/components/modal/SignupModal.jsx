@@ -5,6 +5,7 @@ import LabelInput from './../form/LabelInput';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import auth from './../../apis/auth';
+import flyInFromTopVariants from '../animation/flyInFromTopVariant';
 
 const genderOptions = [
   { value: 'other', label: 'Other' },
@@ -35,7 +36,7 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess }) => {
   };
 
   return (
-    <Overlay onClick={toggleSignupModal}>
+    <Overlay onClick={toggleSignupModal} customVariants={flyInFromTopVariants}>
       <Modal
         onCloseModalClick={toggleSignupModal}
         className="flex h-auto justify-center items-center">

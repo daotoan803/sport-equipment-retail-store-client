@@ -1,5 +1,6 @@
 import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import AuthButtonsGroup from '../header/AuthButtonsGroup';
+import CloseButton from './../button/CloseButton';
 
 const Modal = ({ children, className, onCloseModalClick }) => {
   return (
@@ -9,11 +10,7 @@ const Modal = ({ children, className, onCloseModalClick }) => {
         className
       }
       onClick={(e) => e.stopPropagation()}>
-      <button
-        onClick={onCloseModalClick}
-        className="absolute top-4 right-6 hover:text-primary">
-        <AiOutlineClose className="text-3xl" />
-      </button>
+      <CloseButton onClick={onCloseModalClick} className="top-4 right-6" />
       {children}
     </div>
   );

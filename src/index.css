@@ -21,4 +21,8 @@ code {
     @apply border border-gray-400 rounded-xl px-3 py-2 focus:border-0 focus:outline-none 
     focus-visible:ring focus-visible:ring-primary;
   }
+
+  .dropdown-item {
+    @apply hover:bg-white w-full px-2 py-1 text-center text-black font-semibold hover:text-primary;
+  }
 }
