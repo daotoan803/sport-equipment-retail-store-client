@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthButtonsGroup from './AuthButtonsGroup';
 
-const NavLinks = ({ collapseNavbar, isLoggedIn, toggleLoginModal }) => {
+const NavLinks = ({ collapseNavbar, isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
   return (
     <>
       <div className="dropdown uppercase flex flex-col lg:flex-row">
@@ -14,6 +14,7 @@ const NavLinks = ({ collapseNavbar, isLoggedIn, toggleLoginModal }) => {
         <AuthButtonsGroup
           isLoggedIn={isLoggedIn}
           toggleLoginModal={toggleLoginModal}
+          toggleSignupModal={toggleSignupModal}
         />
       )}
     </>

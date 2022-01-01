@@ -5,7 +5,7 @@ import NavLinks from './NavLinks';
 import Logo from './../Logo';
 import AuthButtonsGroup from './AuthButtonsGroup';
 
-const Header = ({ isLoggedIn, toggleLoginModal }) => {
+const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
   const [collapseNavbar, setCollapseNavbar] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -31,6 +31,7 @@ const Header = ({ isLoggedIn, toggleLoginModal }) => {
             <AuthButtonsGroup
               isLoggedIn={isLoggedIn}
               toggleLoginModal={toggleLoginModal}
+              toggleSignupModal={toggleSignupModal}
             />
             <button
               onClick={toggleNavbar}
@@ -45,6 +46,7 @@ const Header = ({ isLoggedIn, toggleLoginModal }) => {
           <SearchBox />
           <NavLinks
             toggleLoginModal={toggleLoginModal}
+            toggleSignupModal={toggleSignupModal}
             collapseNavbar={collapseNavbar}
             isLoggedIn={isLoggedIn}
           />

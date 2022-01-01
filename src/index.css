@@ -15,3 +15,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer components {
+  .input {
+    @apply border border-gray-400 rounded-xl px-3 py-2 focus:border-0 focus:outline-none 
+    focus-visible:ring focus-visible:ring-primary;
+  }
+}
