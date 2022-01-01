@@ -4,6 +4,7 @@ import auth from './apis/auth';
 import { Route, Routes } from 'react-router-dom';
 import LoginModal from './components/modal/LoginModal';
 import SignupModal from './components/modal/SignupModal';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,21 +23,22 @@ function App() {
     setOpenLoginModal(false);
   };
 
-
   return (
     <>
-      {openLoginModal && !isLoggedIn && (
-        <LoginModal
-          toggleLoginModal={toggleLoginModal}
-          onLoginSuccess={onLoginSuccess}
-        />
-      )}
-      {openSignupModal && !isLoggedIn && (
-        <SignupModal
-          toggleSignupModal={toggleSignupModal}
-          onLoginSuccess={onLoginSuccess}
-        />
-      )}
+      <AnimatePresence>
+        {openLoginModal && !isLoggedIn && (
+          <LoginModal
+            toggleLoginModal={toggleLoginModal}
+            onLoginSuccess={onLoginSuccess}
+          />
+        )}
+        {openSignupModal && !isLoggedIn && (
+          <SignupModal
+            toggleSignupModal={toggleSignupModal}
+            onLoginSuccess={onLoginSuccess}
+          />
+        )}
+      </AnimatePresence>
       <Header
         isLoggedIn={isLoggedIn}
         toggleLoginModal={toggleLoginModal}

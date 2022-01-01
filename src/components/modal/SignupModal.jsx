@@ -6,17 +6,17 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import auth from './../../apis/auth';
 
+const genderOptions = [
+  { value: 'other', label: 'Other' },
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+];
+
 const SignupModal = ({ toggleSignupModal, onLoginSuccess }) => {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [dobInput, setDobInput] = useState(new Date());
   const [passwordInput, setPasswordInput] = useState('');
-
-  const genderOptions = [
-    { value: 'other', label: 'Other' },
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
-  ];
   const [genderInput, setGenderInput] = useState(genderOptions[0].value);
 
   const onSubmit = async (e) => {

@@ -2,22 +2,25 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthButtonsGroup from './AuthButtonsGroup';
 
-const NavLinks = ({ collapseNavbar, isLoggedIn, toggleLoginModal, toggleSignupModal }) => {
+const NavLinks = ({
+  navbarIsCollapsed,
+  isLoggedIn,
+  toggleLoginModal,
+  toggleSignupModal,
+}) => {
   return (
-    <>
-      <div className="dropdown uppercase flex flex-col lg:flex-row">
-        <NavLinkItem to="/" name="Trang chủ" />
-        <NavLinkItem to="/products" name="Sản phẩm" />
-        <NavLinkItem to="/contact" name="Liên hệ" />
-      </div>
-      {!collapseNavbar && (
+    <div className="lg:flex gap-2">
+      <NavLinkItem to="/" name="Trang chủ" />
+      <NavLinkItem to="/products" name="Sản phẩm" />
+      <NavLinkItem to="/contact" name="Liên hệ" />
+      {!navbarIsCollapsed && (
         <AuthButtonsGroup
           isLoggedIn={isLoggedIn}
           toggleLoginModal={toggleLoginModal}
           toggleSignupModal={toggleSignupModal}
         />
       )}
-    </>
+    </div>
   );
 };
 
