@@ -25,4 +25,8 @@ code {
   .dropdown-item {
     @apply hover:bg-white w-full px-2 py-1 text-center text-black font-semibold hover:text-primary;
   }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
 }

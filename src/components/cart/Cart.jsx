@@ -2,18 +2,13 @@ import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import CloseButton from './../button/CloseButton';
 import Overlay from './../modal/Overlay';
-
-const flyInVariant = {
-  hidden: { x: '100vw' },
-  visible: { x: 0, transition: { type: '' } },
-  exit: { x: '100vw', transition: { type: '' } },
-};
+import flyInFromRightVariant from './../animation/flyInFromRightVariant';
 
 const Cart = ({ cartIsOpen, toggleCart }) => {
   return (
     <AnimatePresence>
       {cartIsOpen && (
-        <Overlay onClick={toggleCart} customVariants={flyInVariant}>
+        <Overlay onClick={toggleCart} customVariants={flyInFromRightVariant}>
           <div
             className="fixed z-40 top-0 right-0 
                     bg-white shadow-2xl py-4 px-2

@@ -1,25 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import animateProps from '../animation/animateProps';
+import opacityVariant from '../animation/opacityVariant';
 
-const variants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-  exit: { opacity: 0 },
-};
-
-const Overlay = ({ children, onClick, customVariants=null }) => {
+const Overlay = ({ children, onClick, customVariants = null }) => {
   return (
     <motion.div
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      variants={customVariants || variants}
+      {...animateProps}
+      variants={customVariants || opacityVariant}
       onClick={() => onClick()}
-      className="fixed bg-gray-600/70  top-0 left-0 w-screen h-screen z-20 flex justify-center items-center">
+      className="fixed bg-gray-600/70 top-0 left-0 w-screen h-screen z-20 flex-center">
       {children}
     </motion.div>
   );

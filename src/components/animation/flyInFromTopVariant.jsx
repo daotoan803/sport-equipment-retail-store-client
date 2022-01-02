@@ -8,4 +8,6 @@ const variants = {
   exit: { y: 1000 },
 };
 
+
+
 export default variants;

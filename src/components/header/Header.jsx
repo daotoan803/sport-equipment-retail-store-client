@@ -5,6 +5,7 @@ import NavLinks from './NavLinks';
 import Logo from './../Logo';
 import AuthButtonsGroup from './AuthButtonsGroup';
 import { motion, AnimatePresence } from 'framer-motion';
+import animateProps from '../animation/animateProps';
 
 const openMenuVariants = {
   hidden: { height: 0 },
@@ -54,9 +55,7 @@ const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal, logout,toggle
         {(openNavbar || !navbarIsCollapsed) && (
           <motion.div
             className="lg:flex justify-betweens gap-10"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            {...animateProps}
             variants={openMenuVariants}>
             <SearchBox />
             <NavLinks

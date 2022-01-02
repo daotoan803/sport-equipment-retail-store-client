@@ -8,12 +8,16 @@ import flyInFromTopVariants from '../animation/flyInFromTopVariant';
 const LoginModal = ({ toggleLoginModal, onLoginSuccess }) => {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+  const [loginFail, setLoginFail] = useState('');
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const isLoginSuccess = await auth.logIn(emailInput, passwordInput);
     if (isLoginSuccess) {
-      onLoginSuccess();
+      return onLoginSuccess();
+    }
+    if (isLoginSuccess === false) {
+      setLoginFail(true);
     }
   };
 
@@ -39,7 +43,12 @@ const LoginModal = ({ toggleLoginModal, onLoginSuccess }) => {
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
           />
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center justify-center">
+            {loginFail && (
+              <p className="text-red-500 font-semibold ">
+                Email hoặc mật khẩu không chính xác !
+              </p>
+            )}
             <button className="border-2 bg-primary rounded-3xl text-white px-5 py-2 font-bold hover:bg-white hover:border-primary hover:text-primary">
               Đăng nhập
             </button>

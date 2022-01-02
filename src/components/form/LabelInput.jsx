@@ -10,6 +10,7 @@ const LabelInput = ({
   id = Math.random(),
   inputClassName = '',
   labelClassName = '',
+  error = '',
 }) => {
   return (
     <div className="w-full flex flex-col">
@@ -23,7 +24,9 @@ const LabelInput = ({
         type={type}
         placeholder={placeholder}
         className={inputClassName}
+        error={error}
       />
+      {error && <p className={'text-red-500 font-semibold'}>{error}</p>}
     </div>
   );
 };

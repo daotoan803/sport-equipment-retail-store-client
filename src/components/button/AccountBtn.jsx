@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import animateProps from './../animation/animateProps';
 
 const dropDownVariants = {
   hidden: { scale: 0, y: -70 },
@@ -23,9 +24,7 @@ const AccountBtn = ({ logout }) => {
         <AnimatePresence>
           {openDropdown && (
             <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              {...animateProps}
               variants={dropDownVariants}
               className="absolute overflow-hidden rounded-2xl py-1 -bottom-20 -left-16 z-10 bg-primary min-w-[180px] flex flex-col items-center">
               <Link to="/user" className="dropdown-item">
