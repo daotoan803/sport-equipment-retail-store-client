@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import auth from './apis/auth';
 import LoginModal from './components/modal/LoginModal';
 import SignupModal from './components/modal/SignupModal';
-import { AnimatePresence } from 'framer-motion';
 import Alert from './components/alert/Alert';
 import { Route, Routes } from 'react-router-dom';
-import Shop from './pages/ShopPage';
-import AdminPage from './pages/AdminPage';
+import Shop from './pages/shop/ShopPage';
+import AdminPage from './pages/admin/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
   const [role, setRole] = useState('');
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
-  const [isShowingAlert, setIsShowingAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
@@ -26,10 +24,9 @@ function App() {
   const toggleSignupModal = () => setOpenSignupModal(!openSignupModal);
 
   const showAlert = (message) => {
-    setIsShowingAlert(true);
     setAlertMessage(message);
     setTimeout(() => {
-      setIsShowingAlert(false);
+      setAlertMessage('');
     }, 1600);
   };
 
@@ -48,61 +45,49 @@ function App() {
     setIsLoggedIn(false);
     setRole('');
   };
+
+  const headerProps = {
+    isLoggedIn: isLoggedIn,
+    toggleLoginModal: toggleLoginModal,
+    toggleSignupModal: toggleSignupModal,
+    logout: logout,
+    role: role,
+  };
   return (
     <>
-      <AnimatePresence>
-        {openLoginModal && !isLoggedIn && (
-          <LoginModal
-            toggleLoginModal={toggleLoginModal}
-            onLoginSuccess={onLoginSuccess}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {openSignupModal && !isLoggedIn && (
-          <SignupModal
-            toggleSignupModal={toggleSignupModal}
-            onLoginSuccess={onLoginSuccess}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isShowingAlert && <Alert message={alertMessage} />}
-      </AnimatePresence>
+      <LoginModal
+        isOpen={openLoginModal}
+        toggleLoginModal={toggleLoginModal}
+        onLoginSuccess={onLoginSuccess}
+      />
+      <SignupModal
+        isOpen={openSignupModal}
+        toggleSignupModal={toggleSignupModal}
+        onLoginSuccess={onLoginSuccess}
+      />
+      <Alert message={alertMessage} />
       <Routes>
-        <Route
-          path="/"
-          exact
-          element={
-            <Shop
-              isLoggedIn={isLoggedIn}
-              toggleLoginModal={toggleLoginModal}
-              toggleSignupModal={toggleSignupModal}
-              logout={logout}
-              role={role}
-            />
-          }
-        />
+        <Route path="/" exact element={<Shop {...headerProps} />}>
+          <Route path={'/'} exact element={<h1>Hello world</h1>} />
+          <Route
+            path={'/products'}
+            exact
+            element={<h1>Đây là trang sản phẩm</h1>}
+          />
+          <Route
+            path={'/contact'}
+            exact
+            element={<h1>Đây là trang liên hệ</h1>}
+          />
+          <Route path="*" element={<NotFoundPage {...headerProps} />} />
+        </Route>
 
-        <Route
-          path={'admin'}
-          element={
-            isLoggedIn && role === auth.availableRole.admin && <AdminPage />
-          }
-        />
-
-        <Route
-          path="*"
-          element={
-            <NotFoundPage
-              isLoggedIn={isLoggedIn}
-              toggleLoginModal={toggleLoginModal}
-              toggleSignupModal={toggleSignupModal}
-              logout={logout}
-              role={role}
-            />
-          }
-        />
+        {isLoggedIn && role === auth.availableRole.admin && (
+          <Route path={'/admin'} element={<AdminPage {...headerProps} />}>
+            <Route path="product" element={<h1>This is admin product</h1>} />
+            <Route path="*" element={<NotFoundPage {...headerProps} />} />
+          </Route>
+        )}
       </Routes>
     </>
   );

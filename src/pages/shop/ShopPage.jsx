@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Cart from './../components/cart/Cart';
-import ShopHeader from './../components/header/ShopHeader';
+import { Outlet } from 'react-router-dom';
+import Cart from '../../components/cart/Cart';
+import ShopHeader from '../../components/header/ShopHeader';
 
 const ShopPage = ({
   isLoggedIn,
   toggleLoginModal,
   toggleSignupModal,
-  logout,role
+  logout,
+  role,
 }) => {
   const [cartIsOpen, setCartIsOpen] = useState(false);
   const toggleCart = () => setCartIsOpen(!cartIsOpen);
@@ -22,9 +23,7 @@ const ShopPage = ({
         role={role}
       />
       <Cart cartIsOpen={cartIsOpen} toggleCart={toggleCart} />
-      <Routes>
-        <Route path={'/'} exact element={<h1>Hello world</h1>} />
-      </Routes>
+      <Outlet />
     </>
   );
 };

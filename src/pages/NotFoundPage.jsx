@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from './../components/Logo';
-import ShopHeader from './../components/header/ShopHeader';
 
 const NotFoundPage = ({
   isLoggedIn,
@@ -11,13 +10,6 @@ const NotFoundPage = ({
 }) => {
   return (
     <>
-      <ShopHeader
-        isLoggedIn={isLoggedIn}
-        toggleLoginModal={toggleLoginModal}
-        toggleSignupModal={toggleSignupModal}
-        logout={logout}
-        role={role}
-      />
       <div className="flex-center flex-col gap-5 fixed top-0 left-0 h-screen w-screen">
         <Logo className="text-[60px]" />
         <h1 className="text-[40px] uppercase font-bold">404 Not found</h1>

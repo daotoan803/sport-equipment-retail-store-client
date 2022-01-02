@@ -8,13 +8,14 @@ const AuthButtonsGroup = ({
   toggleSignupModal,
   logout,
   toggleCart,
+  showCartButton = true,
 }) => {
   return (
     <>
       {isLoggedIn && (
         <div className="flex gap-3">
           <AccountBtn logout={logout} />
-          <CartBtn onClick={toggleCart} />
+          {showCartButton && <CartBtn onClick={toggleCart} />}
         </div>
       )}
       {!isLoggedIn && (

@@ -13,7 +13,6 @@ const ShopHeader = ({
   toggleCart,
   role,
 }) => {
-  console.log(role);
   return (
     <Header
       toggleLoginModal={toggleLoginModal}

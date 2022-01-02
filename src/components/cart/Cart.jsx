@@ -2,7 +2,7 @@ import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import CloseButton from './../button/CloseButton';
 import Overlay from './../modal/ui/Overlay';
-import flyInFromRightVariant from './../animation/flyInFromRightVariant';
+import flyInFromRightVariant from './../animation/variants/flyInFromRightVariant';
 
 const Cart = ({ cartIsOpen, toggleCart }) => {
   return (
