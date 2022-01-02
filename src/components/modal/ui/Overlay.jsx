@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import animateProps from '../animation/animateProps';
-import opacityVariant from '../animation/opacityVariant';
+import animateProps from '../../animation/animateProps';
+import opacityVariant from '../../animation/opacityVariant';
 
 const Overlay = ({ children, onClick, customVariants = null }) => {
   return (

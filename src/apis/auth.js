@@ -1,5 +1,12 @@
 const auth = (() => {
   let token = localStorage.getItem('token') || null;
+  let role = localStorage.getItem('role') || null;
+
+  const availableRole = {
+    admin: 'admin',
+    sale: 'sale',
+    storage: 'storage',
+  };
 
   const isLoggedIn = () => token !== null;
 
@@ -7,6 +14,8 @@ const auth = (() => {
     const token = responseBody.token;
     localStorage.setItem('token', token);
   };
+
+  const getRole = () => role;
 
   const logIn = async (email, password) => {
     const response = await fetch('/api/user/signin', {
@@ -20,9 +29,13 @@ const auth = (() => {
     if (response.status === 200) {
       const data = await response.json();
       getTokenAndStore(data);
-      return true;
+      if (data.role) {
+        localStorage.setItem('role', data.role);
+        return { status: response.status, role: data.role };
+      }
+      return { status: response.status };
     }
-    if (response.status === 400) return false;
+    if (response.status === 400) return { status: 400 };
     alert('something happen, please try again');
   };
 
@@ -45,9 +58,10 @@ const auth = (() => {
   const logout = () => {
     token = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
   };
 
-  return { isLoggedIn, logIn, signup, logout };
+  return { isLoggedIn, logIn, signup, logout, getRole, availableRole };
 })();
 
 export default auth;

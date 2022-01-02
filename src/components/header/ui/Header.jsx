@@ -1,11 +1,9 @@
 import { FcMenu } from 'react-icons/fc';
 import { useState, useEffect } from 'react';
-import SearchBox from './../form/SearchBox';
-import NavLinks from './NavLinks';
-import Logo from './../Logo';
-import AuthButtonsGroup from './AuthButtonsGroup';
+import Logo from '../../Logo';
+import AuthButtonsGroup from '../AuthButtonsGroup';
 import { motion, AnimatePresence } from 'framer-motion';
-import animateProps from '../animation/animateProps';
+import animateProps from '../../animation/animateProps';
 
 const openMenuVariants = {
   hidden: { height: 0 },
@@ -13,7 +11,14 @@ const openMenuVariants = {
   exit: { height: 0, overflow: 'hidden' },
 };
 
-const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal, logout,toggleCart }) => {
+const Header = ({
+  isLoggedIn,
+  toggleLoginModal,
+  toggleSignupModal,
+  logout,
+  toggleCart,
+  children,
+}) => {
   const [navbarIsCollapsed, setNavbarIsCollapsed] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -57,18 +62,19 @@ const Header = ({ isLoggedIn, toggleLoginModal, toggleSignupModal, logout,toggle
             className="lg:flex justify-betweens gap-10"
             {...animateProps}
             variants={openMenuVariants}>
-            <SearchBox />
-            <NavLinks
-              toggleLoginModal={toggleLoginModal}
-              toggleSignupModal={toggleSignupModal}
-              navbarIsCollapsed={navbarIsCollapsed}
-              isLoggedIn={isLoggedIn}
-              logout={logout}
-              toggleCart={toggleCart}
-            />
+            {children}
           </motion.div>
         )}
       </AnimatePresence>
+      {!navbarIsCollapsed && (
+        <AuthButtonsGroup
+          isLoggedIn={isLoggedIn}
+          toggleLoginModal={toggleLoginModal}
+          toggleSignupModal={toggleSignupModal}
+          logout={logout}
+          toggleCart={toggleCart}
+        />
+      )}
     </header>
   );
 };

@@ -8,15 +8,19 @@ const Input = ({
   value,
   onChange,
   error,
+  required = false,
 }) => {
   return (
     <input
       type={type}
-      className={'input ' + className + ' ' + (error ? 'ring ring-red-500' : '')}
+      className={
+        'input ' + className + ' ' + (error ? 'ring ring-red-500' : '')
+      }
       id={id}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      required={required}
     />
   );
 };

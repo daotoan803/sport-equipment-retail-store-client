@@ -1,26 +1,27 @@
-import Header from './components/header/Header';
 import { useState, useEffect } from 'react';
 import auth from './apis/auth';
-import { Route, Routes } from 'react-router-dom';
 import LoginModal from './components/modal/LoginModal';
 import SignupModal from './components/modal/SignupModal';
 import { AnimatePresence } from 'framer-motion';
-import Cart from './components/cart/Cart';
 import Alert from './components/alert/Alert';
+import { Route, Routes } from 'react-router-dom';
+import Shop from './pages/ShopPage';
+import AdminPage from './pages/AdminPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState('');
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
-  const [cartIsOpen, setCartIsOpen] = useState(false);
   const [isShowingAlert, setIsShowingAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
     setIsLoggedIn(auth.isLoggedIn());
+    setRole(auth.getRole());
   }, []);
 
-  const toggleCart = () => setCartIsOpen(!cartIsOpen);
   const toggleLoginModal = () => setOpenLoginModal(!openLoginModal);
   const toggleSignupModal = () => setOpenSignupModal(!openSignupModal);
 
@@ -32,7 +33,10 @@ function App() {
     }, 1600);
   };
 
-  const onLoginSuccess = () => {
+  const onLoginSuccess = (role = '') => {
+    if (role) {
+      setRole(role);
+    }
     setIsLoggedIn(true);
     setOpenLoginModal(false);
     setOpenSignupModal(false);
@@ -42,6 +46,7 @@ function App() {
   const logout = () => {
     auth.logout();
     setIsLoggedIn(false);
+    setRole('');
   };
   return (
     <>
@@ -52,24 +57,52 @@ function App() {
             onLoginSuccess={onLoginSuccess}
           />
         )}
+      </AnimatePresence>
+      <AnimatePresence>
         {openSignupModal && !isLoggedIn && (
           <SignupModal
             toggleSignupModal={toggleSignupModal}
             onLoginSuccess={onLoginSuccess}
           />
         )}
-        <Alert message={alertMessage} isShowing={isShowingAlert} />
       </AnimatePresence>
-      <Header
-        isLoggedIn={isLoggedIn}
-        toggleLoginModal={toggleLoginModal}
-        toggleSignupModal={toggleSignupModal}
-        toggleCart={toggleCart}
-        logout={logout}
-      />
-      <Cart cartIsOpen={cartIsOpen} toggleCart={toggleCart} />
+      <AnimatePresence>
+        {isShowingAlert && <Alert message={alertMessage} />}
+      </AnimatePresence>
       <Routes>
-        <Route path={'/'} exact element={<h1>Hello world</h1>} />
+        <Route
+          path="/"
+          exact
+          element={
+            <Shop
+              isLoggedIn={isLoggedIn}
+              toggleLoginModal={toggleLoginModal}
+              toggleSignupModal={toggleSignupModal}
+              logout={logout}
+              role={role}
+            />
+          }
+        />
+
+        <Route
+          path={'admin'}
+          element={
+            isLoggedIn && role === auth.availableRole.admin && <AdminPage />
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <NotFoundPage
+              isLoggedIn={isLoggedIn}
+              toggleLoginModal={toggleLoginModal}
+              toggleSignupModal={toggleSignupModal}
+              logout={logout}
+              role={role}
+            />
+          }
+        />
       </Routes>
     </>
   );

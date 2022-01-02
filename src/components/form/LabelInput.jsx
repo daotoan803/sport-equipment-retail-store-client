@@ -11,6 +11,7 @@ const LabelInput = ({
   inputClassName = '',
   labelClassName = '',
   error = '',
+  required = false,
 }) => {
   return (
     <div className="w-full flex flex-col">
@@ -25,6 +26,7 @@ const LabelInput = ({
         placeholder={placeholder}
         className={inputClassName}
         error={error}
+        required={required}
       />
       {error && <p className={'text-red-500 font-semibold'}>{error}</p>}
     </div>

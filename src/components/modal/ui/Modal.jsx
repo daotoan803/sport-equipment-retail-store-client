@@ -1,6 +1,5 @@
 import React from 'react';
-import AuthButtonsGroup from '../header/AuthButtonsGroup';
-import CloseButton from './../button/CloseButton';
+import CloseButton from '../../button/CloseButton';
 
 const Modal = ({ children, className, onCloseModalClick }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Overlay from './Overlay';
-import Modal from './Modal';
+import Overlay from './ui/Overlay';
+import Modal from './ui/Modal';
 import LabelInput from './../form/LabelInput';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -66,6 +66,7 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess }) => {
               setNameInput(e.target.value);
             }}
             error={nameError}
+            required={true}
           />
           <LabelInput
             type="email"
@@ -119,6 +120,7 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess }) => {
               setPasswordInput(e.target.value);
             }}
             error={passwordError}
+            required={true}
           />
           <div className="flex justify-center mt-2">
             <button className="border-2 bg-primary rounded-3xl text-white px-5 py-2 font-bold hover:bg-white hover:border-primary hover:text-primary">

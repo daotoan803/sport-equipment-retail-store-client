@@ -1,6 +1,5 @@
 const user = (() => {
-
-  return { };
+  return {  };
 })();
 
 export default user;
