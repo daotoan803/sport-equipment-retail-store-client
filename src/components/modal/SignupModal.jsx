@@ -8,6 +8,8 @@ import auth from './../../apis/auth';
 import flyInFromTopVariants from '../animation/variants/flyInFromTopVariant';
 import { AnimatePresence } from 'framer-motion';
 import LoadingSpinner from '../animation/LoadingSpinner';
+import LabelSelectInput from './../form/LabelSelectInput';
+import PrimaryButton from './../button/PrimaryButton';
 
 const genderOptions = [
   { value: 'other', label: 'Other' },
@@ -121,20 +123,13 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
                   Giới tính
                 </label>
                 <br />
-                <select
-                  name=""
-                  id="gender"
-                  className="input"
+                <LabelSelectInput
                   value={genderInput}
+                  options={genderOptions}
                   onChange={(e) => {
                     setGenderInput(e.target.value);
-                  }}>
-                  {genderOptions.map((gender) => (
-                    <option value={gender.value} key={gender.value}>
-                      {gender.label}
-                    </option>
-                  ))}
-                </select>
+                  }}
+                />
               </div>
               <LabelInput
                 type="password"
@@ -149,10 +144,10 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
                 required={true}
               />
               <div className="flex justify-center mt-2">
-                <button className="border-2 bg-primary rounded-3xl text-white px-5 py-2 font-bold hover:bg-white hover:border-primary hover:text-primary">
+                <PrimaryButton>
                   {!loading && 'Đăng nhập'}
                   {loading && <LoadingSpinner />}
-                </button>
+                </PrimaryButton>
               </div>
             </form>
           </Modal>

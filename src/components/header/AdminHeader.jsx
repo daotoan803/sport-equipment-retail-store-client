@@ -8,7 +8,7 @@ const AdminHeader = ({ isLoggedIn, logout }) => {
     <Header isLoggedIn={isLoggedIn} logout={logout} showCartButton={false}>
       <NavLinks>
         <NavLinkItem to="/admin/iexport" name="Xuất nhập kho" />
-        <NavLinkItem to="/admin/products" name="Quản lý sản phẩm" />
+        <NavLinkItem to="/admin/products/" name="Quản lý sản phẩm" />
         <NavLinkItem to="/admin/orders" name="Quản lý đơn hàng" />
         <NavLinkItem to="/admin/chat" name="Tư vấn khách hàng" />
         <NavLinkItem to="/admin/warranty" name="Yêu cầu bảo hành" />

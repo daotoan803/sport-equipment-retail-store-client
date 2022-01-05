@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Cart from '../../components/cart/Cart';
 import ShopHeader from '../../components/header/ShopHeader';
+import MainWrapper from './../../components/ui/MainWrapper';
 
 const ShopPage = ({
   isLoggedIn,
@@ -23,7 +24,9 @@ const ShopPage = ({
         role={role}
       />
       <Cart cartIsOpen={cartIsOpen} toggleCart={toggleCart} />
-      <Outlet />
+      <MainWrapper>
+        <Outlet />
+      </MainWrapper>
     </>
   );
 };

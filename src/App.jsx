@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import Shop from './pages/shop/ShopPage';
 import AdminPage from './pages/admin/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ManageProductPage from './pages/admin/ManageProductPage';
+import AddProduct from './pages/admin/product/AddProduct';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,8 +44,8 @@ function App() {
 
   const logout = () => {
     auth.logout();
-    setIsLoggedIn(false);
     setRole('');
+    setIsLoggedIn(false);
   };
 
   const headerProps = {
@@ -84,7 +86,14 @@ function App() {
 
         {isLoggedIn && role === auth.availableRole.admin && (
           <Route path={'/admin'} element={<AdminPage {...headerProps} />}>
-            <Route path="product" element={<h1>This is admin product</h1>} />
+            <Route path="products" element={<ManageProductPage />}>
+              <Route path="" exact element={<></>} />
+              <Route path="new" element={<AddProduct />} />
+              <Route
+                path="category-and-brand"
+                element={<h1>Brand and category</h1>}
+              />
+            </Route>
             <Route path="*" element={<NotFoundPage {...headerProps} />} />
           </Route>
         )}

@@ -36,6 +36,11 @@ const Header = ({
     setOpenNavbar(!openNavbar);
   };
 
+  const closeNavbar = (e) => {
+    if (!e.target.href && !e.target.parentElement.href) return;
+    setOpenNavbar(!openNavbar);
+  };
+
   const authButtonGroupProps = {
     isLoggedIn: isLoggedIn,
     toggleLoginModal: toggleLoginModal,
@@ -48,15 +53,17 @@ const Header = ({
   return (
     <header className="sticky z-10 top-0 left-0 w-screen bg-white lg:flex justify-between items-center shadow-lg md:px-0 lg:px-20">
       <div className="flex justify-between px-3 py-4 lg:px-0  ">
+        {navbarIsCollapsed && (
+          <button
+            onClick={toggleNavbar}
+            className="rounded shadow-sm px-1 py-0 hover:ring ring-primary lg:hidden">
+            <FcMenu className="text-3xl" />
+          </button>
+        )}
         <Logo />
         {navbarIsCollapsed && (
           <div className="flex gap-2">
             <AuthButtonsGroup {...authButtonGroupProps} />
-            <button
-              onClick={toggleNavbar}
-              className="rounded shadow-sm px-1 py-0 hover:ring ring-primary lg:hidden">
-              <FcMenu className="text-3xl" />
-            </button>
           </div>
         )}
       </div>
@@ -65,7 +72,8 @@ const Header = ({
           <motion.div
             className="lg:flex justify-betweens gap-10"
             {...animateProps}
-            variants={openMenuVariants}>
+            variants={openMenuVariants}
+            onClick={closeNavbar}>
             {children}
           </motion.div>
         )}

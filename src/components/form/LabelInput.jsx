@@ -5,7 +5,7 @@ import animateProps from '../animation/animateProps';
 import shakingVariant from './../animation/variants/shakingVariant';
 
 const LabelInput = ({
-  type,
+  type = 'text',
   placeholder,
   label,
   value,
