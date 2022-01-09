@@ -1,8 +1,6 @@
 import React from 'react';
 import Input from './Input';
-import { motion } from 'framer-motion';
-import animateProps from '../animation/animateProps';
-import shakingVariant from './../animation/variants/shakingVariant';
+import ErrorLabel from './ErrorLabel';
 
 const LabelInput = ({
   type = 'text',
@@ -31,14 +29,7 @@ const LabelInput = ({
         error={error}
         required={required}
       />
-      {error && (
-        <motion.p
-          {...animateProps}
-          variants={shakingVariant}
-          className={'text-red-500 font-semibold'}>
-          {error}
-        </motion.p>
-      )}
+      {error && <ErrorLabel message={error} />}
     </div>
   );
 };

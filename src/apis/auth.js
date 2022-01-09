@@ -61,7 +61,17 @@ const auth = (() => {
     localStorage.removeItem('role');
   };
 
-  return { isLoggedIn, logIn, signup, logout, getRole, availableRole };
+  const getAuthorization = () => 'Bearer ' + token;
+
+  return {
+    isLoggedIn,
+    logIn,
+    signup,
+    logout,
+    getRole,
+    getAuthorization,
+    availableRole,
+  };
 })();
 
 export default auth;

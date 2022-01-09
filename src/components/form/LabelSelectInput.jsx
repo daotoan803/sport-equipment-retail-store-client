@@ -1,4 +1,5 @@
 import React from 'react';
+import Select from 'react-select';
 
 const LabelSelectInput = ({
   label,
@@ -9,21 +10,17 @@ const LabelSelectInput = ({
 }) => {
   return (
     <>
-      <label htmlFor={id} className="font-bold sm:mt-0 sm:ml-4 ">
+      <label htmlFor={id} className="font-bold sm:mt-0  ">
         {label}
       </label>
-      <select
-        name=""
+      <Select
         id={id}
-        className="input"
+        options={options}
         value={value}
-        onChange={onChange}>
-        {options.map((option) => (
-          <option value={option.value} key={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        onChange={onChange}
+        menuPlacement="auto"
+        className="w-full"
+      />
     </>
   );
 };
