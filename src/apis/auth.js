@@ -61,7 +61,10 @@ const auth = (() => {
     localStorage.removeItem('role');
   };
 
-  const getAuthorization = () => 'Bearer ' + token;
+  const getAuthorization = () => {
+    console.log(token);
+    return `Bearer ${token}`;
+  };
 
   return {
     isLoggedIn,

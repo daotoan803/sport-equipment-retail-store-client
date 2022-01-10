@@ -42,14 +42,14 @@ const AddProduct = () => {
     fetch('/api/brands')
       .then((res) => res.json())
       .then((brands) => {
-        setCategoryOptions(
+        setBrandOptions(
           brands.map((brand) => ({ value: brand.id, label: brand.name }))
         );
       });
     fetch('/api/categories')
       .then((res) => res.json())
       .then((categories) => {
-        setBrandOptions(
+        setCategoryOptions(
           categories.map((category) => ({
             value: category.id,
             label: category.name,
@@ -77,7 +77,7 @@ const AddProduct = () => {
       return;
     }
 
-    const response = await productApi.addProduct({
+    const result = await productApi.addProduct({
       title,
       detail,
       price,
@@ -87,10 +87,18 @@ const AddProduct = () => {
       state,
       brand,
       categories,
-      images,
     });
-    if (response.status === 200) {
-      alert('ok');
+    if (result.status === 200) {
+      const productId = result.data.id;
+      console.log(result.data);
+      const result2 = await productApi.uploadImages(
+        productId,
+        images.map((image) => image.file)
+      );
+      if (result2.status === 200) {
+        return alert('ok');
+      }
+      return alert('something not good :(');
     }
   };
 

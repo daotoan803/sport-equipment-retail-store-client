@@ -3,6 +3,7 @@ import auth from './auth';
 const product = (() => {
   const uploadImages = (productId, images) => {
     const formData = new FormData();
+    formData.append('productId', productId);
     images.forEach((image) => {
       formData.append('images', image);
     });
@@ -26,7 +27,6 @@ const product = (() => {
     state,
     brand,
     categories,
-    images,
   }) => {
     const response = await fetch('/api/admin/product', {
       method: 'POST',
@@ -34,7 +34,7 @@ const product = (() => {
         'Content-type': 'application/json',
         Authorization: auth.getAuthorization(),
       },
-      body: {
+      body: JSON.stringify({
         title,
         detail,
         price,
@@ -42,20 +42,13 @@ const product = (() => {
         warrantyPeriodByDay,
         availableQuantity,
         state,
-        brand,
+        brandId: brand,
         categories,
-      },
+      }),
     });
 
-    const product = response.json();
-    if (response.status === 200) {
-      await uploadImages(
-        product.id,
-        images.map((image) => image.file)
-      );
-    }
-
-    return response;
+    const data = await response.json();
+    return { status: response.status, data };
   };
 
   return { addProduct, uploadImages };
