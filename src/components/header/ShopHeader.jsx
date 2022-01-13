@@ -1,28 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './ui/Header';
 import SearchBox from './../form/SearchBox';
 import NavLinks from './ui/NavLinks';
 import NavLinkItem from './NavLinkItem';
 import auth from './../../apis/auth';
+import AuthContext from './../../contexts/AuthContext';
 
-const ShopHeader = ({
-  isLoggedIn,
-  toggleLoginModal,
-  toggleSignupModal,
-  logout,
-  toggleCart,
-  role,
-}) => {
+const ShopHeader = () => {
+  const authCtx = useContext(AuthContext);
+
   return (
-    <Header
-      toggleLoginModal={toggleLoginModal}
-      toggleSignupModal={toggleSignupModal}
-      isLoggedIn={isLoggedIn}
-      logout={logout}
-      toggleCart={toggleCart}>
+    <Header>
       <SearchBox />
       <NavLinks>
-        {role === auth.availableRole.admin && (
+        {authCtx.role === auth.availableRole.admin && (
           <NavLinkItem to="/admin" name="Quản lý" />
         )}
         <NavLinkItem to="/" name="Trang chủ" />
@@ -34,3 +25,5 @@ const ShopHeader = ({
 };
 
 export default ShopHeader;
+
+ShopHeader.propTypes = {};

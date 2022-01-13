@@ -3,9 +3,9 @@ import Header from './ui/Header';
 import NavLinks from './ui/NavLinks';
 import NavLinkItem from './NavLinkItem';
 
-const AdminHeader = ({ isLoggedIn, logout }) => {
+const AdminHeader = () => {
   return (
-    <Header isLoggedIn={isLoggedIn} logout={logout} showCartButton={false}>
+    <Header showCartButton={false}>
       <NavLinks>
         <NavLinkItem to="/admin/iexport" name="Xuất nhập kho" />
         <NavLinkItem to="/admin/products/" name="Quản lý sản phẩm" />

@@ -1,7 +1,18 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import PropTypes from 'prop-types';
 
-const ImagesPreviewArea = ({ images, reorder, onDbClick }) => {
+ImagesPreviewArea.propTypes = {
+  images: PropTypes.array.isRequired,
+  reorder: PropTypes.func,
+  onDbClick: PropTypes.func,
+};
+
+const ImagesPreviewArea = ({
+  images,
+  reorder = () => {},
+  onDbClick = () => {},
+}) => {
   const onDragEndHandle = (e) => {
     if (!e.destination) {
       return;
@@ -18,7 +29,7 @@ const ImagesPreviewArea = ({ images, reorder, onDbClick }) => {
   return (
     <DragDropContext onDragEnd={onDragEndHandle}>
       <Droppable droppableId="droppable" direction="horizontal">
-        {(provided, snapshot) => (
+        {(provided) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
@@ -28,7 +39,7 @@ const ImagesPreviewArea = ({ images, reorder, onDbClick }) => {
                 key={image.name}
                 draggableId={image.name}
                 index={index}>
-                {(provided, snapshot) => (
+                {(provided) => (
                   <img
                     onClick={handleImageClick}
                     src={image.url}

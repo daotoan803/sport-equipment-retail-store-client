@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const auth = (() => {
   let token = localStorage.getItem('token') || null;
   let role = localStorage.getItem('role') || null;
@@ -6,53 +8,48 @@ const auth = (() => {
     admin: 'admin',
     sale: 'sale',
     storage: 'storage',
+    customer: '',
   };
 
   const isLoggedIn = () => token !== null;
 
-  const getTokenAndStore = (responseBody) => {
-    const token = responseBody.token;
-    localStorage.setItem('token', token);
+  const storeToken = (newToken) => {
+    token = newToken;
+    localStorage.setItem('token', newToken);
   };
 
   const getRole = () => role;
 
   const logIn = async (email, password) => {
-    const response = await fetch('/api/user/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/json',
-      },
-      body: JSON.stringify({ email, password }),
+    const { data, status } = await axios.post('/api/user/signin', {
+      email,
+      password,
     });
 
-    if (response.status === 200) {
-      const data = await response.json();
-      getTokenAndStore(data);
+    if (status === 200) {
+      storeToken(data.token);
       if (data.role) {
         localStorage.setItem('role', data.role);
-        return { status: response.status, role: data.role };
       }
-      return { status: response.status };
     }
-    if (response.status === 400) return { status: 400 };
-    alert('something happen, please try again');
+
+    if (status === 500) alert('something happen, please try again');
+    return { status: status, role: data.role };
   };
 
   const signup = async ({ name, email, dob, gender, password }) => {
-    const response = await fetch('/api/user/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email, dob, gender, password }),
+    const { status, data } = await axios.post('/api/user/signup', {
+      name,
+      email,
+      dob,
+      gender,
+      password,
     });
-    const data = await response.json();
 
-    if (response.status === 200) {
-      getTokenAndStore(data);
+    if (status === 200) {
+      storeToken(data.token);
     }
-    return { status: response.status, data };
+    return { status, data };
   };
 
   const logout = () => {
@@ -61,9 +58,10 @@ const auth = (() => {
     localStorage.removeItem('role');
   };
 
-  const getAuthorization = () => {
-    console.log(token);
-    return `Bearer ${token}`;
+  const getAxiosAuthorizationConfig = () => {
+    return {
+      headers: { Authorization: `Bearer ${token}` },
+    };
   };
 
   return {
@@ -72,7 +70,7 @@ const auth = (() => {
     signup,
     logout,
     getRole,
-    getAuthorization,
+    getAxiosAuthorizationConfig,
     availableRole,
   };
 })();

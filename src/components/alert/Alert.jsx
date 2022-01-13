@@ -3,6 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import flyInFromTopVariants from '../animation/variants/flyInFromTopVariant';
 import animateProps from '../animation/animateProps';
 
+import PropTypes from 'prop-types';
+
+Alert.propTypes = {
+  message: PropTypes.string.isRequired,
+};
+
 const Alert = ({ message }) => {
   return (
     <AnimatePresence>

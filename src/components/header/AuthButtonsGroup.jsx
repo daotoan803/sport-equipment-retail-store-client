@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AccountBtn from '../button/AccountBtn';
 import CartBtn from './../button/CartBtn';
+import AuthContext from './../../contexts/AuthContext';
+import PropTypes from 'prop-types';
+import LoginModalContext from './../../contexts/LoginModalContext';
+import SignupModalContext from './../../contexts/SignupModalContext';
+import CartContext from './../../contexts/CartContext';
 
-const AuthButtonsGroup = ({
-  isLoggedIn,
-  toggleLoginModal,
-  toggleSignupModal,
-  logout,
-  toggleCart,
-  showCartButton = true,
-}) => {
+AuthButtonsGroup.propTypes = {
+  showCartButton: PropTypes.bool,
+};
+
+const AuthButtonsGroup = ({ showCartButton = true }) => {
+  const authCtx = useContext(AuthContext);
+  const loginModalCtx = useContext(LoginModalContext);
+  const signupModalCtx = useContext(SignupModalContext);
+  const cartCtx = useContext(CartContext);
+
   return (
     <>
-      {isLoggedIn && (
+      {authCtx.isLoggedIn && (
         <div className="flex gap-3">
-          <AccountBtn logout={logout} />
-          {showCartButton && <CartBtn onClick={toggleCart} />}
+          <AccountBtn logout={authCtx.logout} />
+          {showCartButton && <CartBtn onClick={cartCtx.toggleCart} />}
         </div>
       )}
-      {!isLoggedIn && (
+      {!authCtx.isLoggedIn && (
         <div className="flex gap-3 items-center">
           <button
-            onClick={toggleLoginModal}
+            onClick={loginModalCtx.toggleLoginModal}
             className="text-primary font-bold px-4 py-1 border-2 border-primary rounded-3xl hover:bg-primary hover:text-white">
             Login
           </button>
           <button
-            onClick={toggleSignupModal}
+            onClick={signupModalCtx.toggleSignupModal}
             className="hover:text-primary font-semibold">
             Signup
           </button>

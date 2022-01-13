@@ -1,4 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+Input.propTypes = {
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  error: PropTypes.string,
+  required: PropTypes.bool,
+};
 
 const Input = ({
   type,

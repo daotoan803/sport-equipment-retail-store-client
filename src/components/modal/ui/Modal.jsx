@@ -1,5 +1,12 @@
 import React from 'react';
 import CloseButton from '../../button/CloseButton';
+import PropTypes from 'prop-types';
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onCloseModalClick: PropTypes.func,
+};
 
 const Modal = ({ children, className, onCloseModalClick }) => {
   return (

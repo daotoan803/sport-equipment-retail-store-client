@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom';
 import AdminHeader from './../../components/header/AdminHeader';
 import MainWrapper from './../../components/ui/MainWrapper';
 
-const AdminPage = ({ isLoggedIn, logout }) => {
+const AdminPage = () => {
   return (
     <>
-      <AdminHeader isLoggedIn={isLoggedIn} logout={logout} />
+      <AdminHeader />
       <MainWrapper>
         <Outlet />
       </MainWrapper>

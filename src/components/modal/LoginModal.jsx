@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from './ui/Modal';
 import Overlay from './ui/Overlay';
 import LabelInput from './../form/LabelInput';
@@ -8,12 +8,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from './../animation/LoadingSpinner';
 import animateProps from '../animation/animateProps';
 import shakingVariant from './../animation/variants/shakingVariant';
+import AuthContext from './../../contexts/AuthContext';
+import PropTypes from 'prop-types';
+import PrimaryButton from './../button/PrimaryButton';
+import AlertContext from './../../contexts/AlertContext';
 
-const LoginModal = ({ toggleLoginModal, onLoginSuccess, isOpen }) => {
+LoginModal.propTypes = {
+  toggleLoginModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};
+
+const LoginModal = ({ toggleLoginModal, isOpen }) => {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [loginFail, setLoginFail] = useState('');
   const [loading, setLoading] = useState('');
+
+  const authCtx = useContext(AuthContext);
+  const alertCtx = useContext(AlertContext);
 
   const clearInput = () => {
     setEmailInput('');
@@ -30,7 +42,9 @@ const LoginModal = ({ toggleLoginModal, onLoginSuccess, isOpen }) => {
     setLoading(false);
     if (loginResult.status === 200) {
       clearInput();
-      return onLoginSuccess(loginResult.role || null);
+      alertCtx.showAlert('Login success 🎉');
+      toggleLoginModal();
+      return authCtx.login(loginResult.role || '');
     }
     if (loginResult.status === 400) {
       setLoginFail(true);
@@ -80,10 +94,9 @@ const LoginModal = ({ toggleLoginModal, onLoginSuccess, isOpen }) => {
                     Email hoặc mật khẩu không chính xác !
                   </motion.p>
                 )}
-                <button className="border-2 bg-primary rounded-3xl text-white px-5 py-2 font-bold hover:bg-white hover:border-primary hover:text-primary">
-                  {!loading && 'Đăng nhập'}
-                  {loading && <LoadingSpinner />}
-                </button>
+                <PrimaryButton>
+                  {!loading ? 'Đăng nhập' : <LoadingSpinner />}
+                </PrimaryButton>
               </div>
             </form>
           </Modal>

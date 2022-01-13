@@ -1,9 +1,10 @@
 import { FcMenu } from 'react-icons/fc';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../Logo';
 import AuthButtonsGroup from '../AuthButtonsGroup';
 import { motion, AnimatePresence } from 'framer-motion';
 import animateProps from '../../animation/animateProps';
+import PropTypes from 'prop-types';
 
 const openMenuVariants = {
   hidden: { height: 0 },
@@ -11,15 +12,12 @@ const openMenuVariants = {
   exit: { height: 0, overflow: 'hidden' },
 };
 
-const Header = ({
-  isLoggedIn,
-  toggleLoginModal,
-  toggleSignupModal,
-  logout,
-  toggleCart,
-  children,
-  showCartButton = true,
-}) => {
+Header.propTypes = {
+  children: PropTypes.node,
+  showCartButton: PropTypes.bool,
+};
+
+const Header = ({ children, showCartButton = true }) => {
   const [navbarIsCollapsed, setNavbarIsCollapsed] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -42,11 +40,6 @@ const Header = ({
   };
 
   const authButtonGroupProps = {
-    isLoggedIn: isLoggedIn,
-    toggleLoginModal: toggleLoginModal,
-    toggleSignupModal: toggleSignupModal,
-    logout: logout,
-    toggleCart: toggleCart,
     showCartButton: showCartButton,
   };
 

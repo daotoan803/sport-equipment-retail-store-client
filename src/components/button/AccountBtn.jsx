@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import animateProps from './../animation/animateProps';
+import AuthContext from './../../contexts/AuthContext';
+import auth from '../../apis/auth';
 
 const dropDownVariants = {
   hidden: { scale: 0, y: -70 },
@@ -10,8 +12,14 @@ const dropDownVariants = {
   exit: { y: -70, scale: 0 },
 };
 
-const AccountBtn = ({ logout }) => {
+const AccountBtn = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
+  const authCtx = useContext(AuthContext);
+
+  const logout = () => {
+    authCtx.logout();
+    auth.logout();
+  };
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Overlay from './ui/Overlay';
 import Modal from './ui/Modal';
 import LabelInput from './../form/LabelInput';
@@ -10,6 +10,8 @@ import { AnimatePresence } from 'framer-motion';
 import LoadingSpinner from '../animation/LoadingSpinner';
 import LabelSelectInput from './../form/LabelSelectInput';
 import PrimaryButton from './../button/PrimaryButton';
+import PropTypes from 'prop-types';
+import AuthContext from './../../contexts/AuthContext';
 
 const genderOptions = [
   { value: 'other', label: 'Other' },
@@ -17,7 +19,13 @@ const genderOptions = [
   { value: 'female', label: 'Female' },
 ];
 
-const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
+
+SignupModal.propTypes = {
+  toggleSignupModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};
+
+const SignupModal = ({ toggleSignupModal, isOpen }) => {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [dobInput, setDobInput] = useState(new Date());
@@ -29,6 +37,8 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
   const [nameError, setNameError] = useState('');
 
   const [loading, setLoading] = useState(false);
+
+  const authCtx = useContext(AuthContext);
 
   const clearInput = () => {
     setNameInput('');
@@ -59,7 +69,7 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
     setLoading(false);
     if (result.status === 200) {
       clearInput();
-      return onLoginSuccess();
+      return authCtx.login(result.data.role);
     }
     if (result.status === 409) {
       setEmailError(result.data.error);
@@ -158,3 +168,4 @@ const SignupModal = ({ toggleSignupModal, onLoginSuccess, isOpen }) => {
 };
 
 export default SignupModal;
+

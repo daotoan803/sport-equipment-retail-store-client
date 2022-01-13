@@ -1,5 +1,10 @@
 import React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import PropTypes from 'prop-types';
+
+CartBtn.propTypes = {
+  onClick: PropTypes.func,
+};
 
 const CartBtn = ({ onClick }) => {
   return (

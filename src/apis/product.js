@@ -1,4 +1,5 @@
 import auth from './auth';
+import axios from 'axios';
 
 const product = (() => {
   const uploadImages = (productId, images) => {
@@ -8,13 +9,11 @@ const product = (() => {
       formData.append('images', image);
     });
 
-    return fetch('/api/admin/product/images', {
-      method: 'POST',
-      headers: {
-        Authorization: auth.getAuthorization(),
-      },
-      body: formData,
-    });
+    return axios.post(
+      '/api/admin/product/images',
+      formData,
+      auth.getAxiosAuthorizationConfig
+    );
   };
 
   const addProduct = async ({
@@ -28,13 +27,9 @@ const product = (() => {
     brand,
     categories,
   }) => {
-    const response = await fetch('/api/admin/product', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: auth.getAuthorization(),
-      },
-      body: JSON.stringify({
+    const { status, data } = await axios.post(
+      '/api/admin/product',
+      {
         title,
         detail,
         price,
@@ -44,11 +39,11 @@ const product = (() => {
         state,
         brandId: brand,
         categories,
-      }),
-    });
+      },
+      auth.getAxiosAuthorizationConfig
+    );
 
-    const data = await response.json();
-    return { status: response.status, data };
+    return { status, data };
   };
 
   return { addProduct, uploadImages };

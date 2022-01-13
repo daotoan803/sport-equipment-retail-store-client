@@ -1,6 +1,14 @@
-
+import React from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import PropTypes from 'prop-types';
+
+LabelMultiSelectInput.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 const LabelMultiSelectInput = ({
   label,

@@ -1,6 +1,20 @@
 import React from 'react';
 import Input from './Input';
 import ErrorLabel from './ErrorLabel';
+import PropTypes from 'prop-types';
+
+LabelInput.propTypes = {
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  inputClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
+  error: PropTypes.string,
+  required: PropTypes.bool,
+};
 
 const LabelInput = ({
   type = 'text',

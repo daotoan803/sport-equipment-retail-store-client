@@ -2,6 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import animateProps from '../../animation/animateProps';
 import opacityVariant from '../../animation/variants/opacityVariant';
+import PropTypes from 'prop-types';
+
+Overlay.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  customVariants: PropTypes.object,
+};
 
 const Overlay = ({ children, onClick, customVariants = null }) => {
   return (

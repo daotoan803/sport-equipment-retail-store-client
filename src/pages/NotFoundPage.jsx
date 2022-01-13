@@ -1,13 +1,7 @@
 import React from 'react';
 import Logo from './../components/Logo';
 
-const NotFoundPage = ({
-  isLoggedIn,
-  toggleLoginModal,
-  toggleSignupModal,
-  logout,
-  role,
-}) => {
+const NotFoundPage = () => {
   return (
     <>
       <div className="flex-center flex-col gap-5 fixed top-0 left-0 h-screen w-screen">

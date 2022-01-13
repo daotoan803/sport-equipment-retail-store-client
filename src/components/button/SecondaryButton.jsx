@@ -1,4 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+SecondaryButton.propTypes = {
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
 
 const SecondaryButton = ({ onClick, children, className }) => {
   return (

@@ -62,7 +62,6 @@ const AddProduct = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(brandError);
     if (haveError()) return;
     if (categories.length === 0) {
       setCategoriesError('Sản phẩm cần thuộC ít nhất một danh mục');
@@ -90,7 +89,6 @@ const AddProduct = () => {
     });
     if (result.status === 200) {
       const productId = result.data.id;
-      console.log(result.data);
       const result2 = await productApi.uploadImages(
         productId,
         images.map((image) => image.file)
