@@ -7,10 +7,6 @@ import LoginModalContext from './../../contexts/LoginModalContext';
 import SignupModalContext from './../../contexts/SignupModalContext';
 import CartContext from './../../contexts/CartContext';
 
-AuthButtonsGroup.propTypes = {
-  showCartButton: PropTypes.bool,
-};
-
 const AuthButtonsGroup = ({ showCartButton = true }) => {
   const authCtx = useContext(AuthContext);
   const loginModalCtx = useContext(LoginModalContext);
@@ -44,3 +40,7 @@ const AuthButtonsGroup = ({ showCartButton = true }) => {
 };
 
 export default AuthButtonsGroup;
+
+AuthButtonsGroup.propTypes = {
+  showCartButton: PropTypes.bool,
+};

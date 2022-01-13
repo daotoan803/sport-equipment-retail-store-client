@@ -7,10 +7,6 @@ const LoginModalContext = createContext({
 });
 export default LoginModalContext;
 
-LoginModalContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export const LoginModalContextProvider = ({ children }) => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
 
@@ -22,4 +18,8 @@ export const LoginModalContextProvider = ({ children }) => {
       {children}
     </LoginModalContext.Provider>
   );
+};
+
+LoginModalContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

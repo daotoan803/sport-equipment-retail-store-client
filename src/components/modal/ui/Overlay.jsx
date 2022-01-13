@@ -4,12 +4,6 @@ import animateProps from '../../animation/animateProps';
 import opacityVariant from '../../animation/variants/opacityVariant';
 import PropTypes from 'prop-types';
 
-Overlay.propTypes = {
-  children: PropTypes.node,
-  onClick: PropTypes.func,
-  customVariants: PropTypes.object,
-};
-
 const Overlay = ({ children, onClick, customVariants = null }) => {
   return (
     <motion.div
@@ -23,3 +17,9 @@ const Overlay = ({ children, onClick, customVariants = null }) => {
 };
 
 export default Overlay;
+
+Overlay.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  customVariants: PropTypes.object,
+};

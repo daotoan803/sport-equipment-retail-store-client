@@ -8,11 +8,6 @@ const AlertContext = createContext({
 });
 export default AlertContext;
 
-AlertContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-
 export const AlertContextProvider = ({ children }) => {
   const [message, setAlertMessage] = useState('');
 
@@ -29,4 +24,8 @@ export const AlertContextProvider = ({ children }) => {
       {children}
     </AlertContext.Provider>
   );
+};
+
+AlertContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

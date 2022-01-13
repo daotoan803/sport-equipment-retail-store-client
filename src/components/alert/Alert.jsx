@@ -5,10 +5,6 @@ import animateProps from '../animation/animateProps';
 
 import PropTypes from 'prop-types';
 
-Alert.propTypes = {
-  message: PropTypes.string.isRequired,
-};
-
 const Alert = ({ message }) => {
   return (
     <AnimatePresence>
@@ -28,3 +24,7 @@ const Alert = ({ message }) => {
 };
 
 export default Alert;
+
+Alert.propTypes = {
+  message: PropTypes.string.isRequired,
+};

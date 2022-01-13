@@ -3,13 +3,6 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import PropTypes from 'prop-types';
 
-LabelMultiSelectInput.propTypes = {
-  label: PropTypes.string,
-  id: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
 const LabelMultiSelectInput = ({
   label,
   id = Math.random(),
@@ -36,3 +29,10 @@ const LabelMultiSelectInput = ({
 };
 
 export default LabelMultiSelectInput;
+
+LabelMultiSelectInput.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.any,
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
+};

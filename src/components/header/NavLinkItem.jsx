@@ -2,10 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-NavLinkItem.propTypes = {
-  to: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};
 const NavLinkItem = ({ to, name }) => {
   return (
     <NavLink
@@ -19,3 +15,8 @@ const NavLinkItem = ({ to, name }) => {
 };
 
 export default NavLinkItem;
+
+NavLinkItem.propTypes = {
+  to: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};

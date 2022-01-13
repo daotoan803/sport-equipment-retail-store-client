@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const AsideNavItem = ({ to, children }) => {
   return (
@@ -14,6 +15,11 @@ const AsideNavItem = ({ to, children }) => {
       {children}
     </NavLink>
   );
+};
+
+AsideNavItem.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.any,
 };
 
 export default AsideNavItem;

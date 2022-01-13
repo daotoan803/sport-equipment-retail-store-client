@@ -5,11 +5,6 @@ import Overlay from './../modal/ui/Overlay';
 import flyInFromRightVariant from './../animation/variants/flyInFromRightVariant';
 import PropTypes from 'prop-types';
 
-Cart.propTypes = {
-  cartIsOpen: PropTypes.bool.isRequired,
-  toggleCart: PropTypes.bool.isRequired,
-};
-
 const Cart = ({ cartIsOpen, toggleCart }) => {
   return (
     <AnimatePresence>
@@ -29,3 +24,8 @@ const Cart = ({ cartIsOpen, toggleCart }) => {
 };
 
 export default Cart;
+
+Cart.propTypes = {
+  cartIsOpen: PropTypes.bool.isRequired,
+  toggleCart: PropTypes.func.isRequired,
+};

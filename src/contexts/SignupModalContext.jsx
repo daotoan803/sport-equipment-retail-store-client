@@ -7,10 +7,6 @@ const SignupModalContext = createContext({
 });
 export default SignupModalContext;
 
-SignupModalContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export const SignupModalContextProvider = ({ children }) => {
   const [openSignupModal, setOpenSignupModal] = useState(false);
 
@@ -25,4 +21,8 @@ export const SignupModalContextProvider = ({ children }) => {
       {children}
     </SignupModalContext.Provider>
   );
+};
+
+SignupModalContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

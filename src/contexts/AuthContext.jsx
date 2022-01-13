@@ -11,10 +11,6 @@ const AuthContext = createContext({
 });
 export default AuthContext;
 
-AuthContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState('');
@@ -41,4 +37,8 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

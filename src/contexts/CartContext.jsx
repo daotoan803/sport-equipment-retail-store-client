@@ -7,10 +7,6 @@ const CartContext = createContext({
 });
 export default CartContext;
 
-CartContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export const CartContextProvider = ({ children }) => {
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
@@ -22,4 +18,8 @@ export const CartContextProvider = ({ children }) => {
       {children}
     </CartContext.Provider>
   );
+};
+
+CartContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

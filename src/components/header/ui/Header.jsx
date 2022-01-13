@@ -11,12 +11,6 @@ const openMenuVariants = {
   visible: { height: 'auto' },
   exit: { height: 0, overflow: 'hidden' },
 };
-
-Header.propTypes = {
-  children: PropTypes.node,
-  showCartButton: PropTypes.bool,
-};
-
 const Header = ({ children, showCartButton = true }) => {
   const [navbarIsCollapsed, setNavbarIsCollapsed] = useState(true);
   const [openNavbar, setOpenNavbar] = useState(false);
@@ -24,7 +18,11 @@ const Header = ({ children, showCartButton = true }) => {
   useEffect(() => {
     window.addEventListener('resize', resize);
     resize();
-  });
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   const resize = () => {
     setNavbarIsCollapsed(window.innerWidth <= 1024);
@@ -77,3 +75,8 @@ const Header = ({ children, showCartButton = true }) => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  children: PropTypes.node,
+  showCartButton: PropTypes.bool,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MainWrapper = ({ children }) => {
   return (
@@ -8,6 +9,10 @@ const MainWrapper = ({ children }) => {
       </div>
     </main>
   );
+};
+
+MainWrapper.propTypes = {
+  children: PropTypes.node,
 };
 
 export default MainWrapper;

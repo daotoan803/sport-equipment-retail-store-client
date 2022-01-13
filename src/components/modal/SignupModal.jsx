@@ -19,12 +19,6 @@ const genderOptions = [
   { value: 'female', label: 'Female' },
 ];
 
-
-SignupModal.propTypes = {
-  toggleSignupModal: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-};
-
 const SignupModal = ({ toggleSignupModal, isOpen }) => {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
@@ -169,3 +163,7 @@ const SignupModal = ({ toggleSignupModal, isOpen }) => {
 
 export default SignupModal;
 
+SignupModal.propTypes = {
+  toggleSignupModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};

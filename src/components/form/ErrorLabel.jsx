@@ -4,10 +4,6 @@ import shakingVariant from '../animation/variants/shakingVariant';
 import animateProps from './../animation/animateProps';
 import PropTypes from 'prop-types';
 
-ErrorLabel.propTypes = {
-  message: PropTypes.string.isRequired,
-};
-
 const ErrorLabel = ({ message }) => {
   return (
     <>
@@ -24,3 +20,7 @@ const ErrorLabel = ({ message }) => {
 };
 
 export default ErrorLabel;
+
+ErrorLabel.propTypes = {
+  message: PropTypes.string.isRequired,
+};

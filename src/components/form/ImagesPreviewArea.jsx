@@ -2,12 +2,6 @@ import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 
-ImagesPreviewArea.propTypes = {
-  images: PropTypes.array.isRequired,
-  reorder: PropTypes.func,
-  onDbClick: PropTypes.func,
-};
-
 const ImagesPreviewArea = ({
   images,
   reorder = () => {},
@@ -60,3 +54,9 @@ const ImagesPreviewArea = ({
 };
 
 export default ImagesPreviewArea;
+
+ImagesPreviewArea.propTypes = {
+  images: PropTypes.array.isRequired,
+  reorder: PropTypes.func,
+  onDbClick: PropTypes.func,
+};

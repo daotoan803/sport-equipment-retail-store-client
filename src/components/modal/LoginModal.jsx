@@ -13,11 +13,6 @@ import PropTypes from 'prop-types';
 import PrimaryButton from './../button/PrimaryButton';
 import AlertContext from './../../contexts/AlertContext';
 
-LoginModal.propTypes = {
-  toggleLoginModal: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-};
-
 const LoginModal = ({ toggleLoginModal, isOpen }) => {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -107,3 +102,8 @@ const LoginModal = ({ toggleLoginModal, isOpen }) => {
 };
 
 export default LoginModal;
+
+LoginModal.propTypes = {
+  toggleLoginModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};

@@ -2,14 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-LabelSelectInput.propTypes = {
-  label: PropTypes.string,
-  id: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
 const LabelSelectInput = ({
   label,
   id = Math.random(),
@@ -35,3 +27,11 @@ const LabelSelectInput = ({
 };
 
 export default LabelSelectInput;
+
+LabelSelectInput.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.any,
+  options: PropTypes.array.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
