@@ -37,39 +37,35 @@ const Header = ({ children, showCartButton = true }) => {
     setOpenNavbar(!openNavbar);
   };
 
-  const authButtonGroupProps = {
-    showCartButton: showCartButton,
-  };
-
   return (
-    <header className="sticky z-10 top-0 left-0 w-screen bg-white lg:flex justify-between items-center shadow-lg md:px-0 lg:px-20">
-      <div className="flex justify-between px-3 py-4 lg:px-0  ">
-        {navbarIsCollapsed && (
+    <header className="sticky z-10 top-0 w-screen bg-white py-2 px-2">
+      <div className="gap-2 grid grid-cols-4 lg:grid-cols-12 grid-flow-row-dense container mx-auto">
+        {/* LOGO */}
+        <div className="col-span-2  justify-start gap-2 flex-center">
           <button
             onClick={toggleNavbar}
-            className="rounded shadow-sm px-1 py-0 hover:ring ring-primary lg:hidden">
+            className="rounded inline shadow-sm px-1 py-0 hover:ring ring-primary lg:hidden">
             <FcMenu className="text-3xl" />
           </button>
-        )}
-        <Logo />
-        {navbarIsCollapsed && (
-          <div className="flex gap-2">
-            <AuthButtonsGroup {...authButtonGroupProps} />
-          </div>
-        )}
+          <Logo className="text-2xl lg:text-3xl" />
+        </div>
+        {/* NavItems */}
+        <AnimatePresence>
+          {(openNavbar || !navbarIsCollapsed) && (
+            <motion.div
+              className="col-span-4 lg:col-span-8 lg:flex lg:justify-around gap-2 "
+              {...animateProps}
+              variants={openMenuVariants}
+              onClick={closeNavbar}>
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="col-start-4 lg:col-start-12 flex-center gap-2">
+          <AuthButtonsGroup showCartButton={showCartButton} />
+        </div>
       </div>
-      <AnimatePresence>
-        {(openNavbar || !navbarIsCollapsed) && (
-          <motion.div
-            className="lg:flex justify-betweens gap-10"
-            {...animateProps}
-            variants={openMenuVariants}
-            onClick={closeNavbar}>
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {!navbarIsCollapsed && <AuthButtonsGroup {...authButtonGroupProps} />}
     </header>
   );
 };

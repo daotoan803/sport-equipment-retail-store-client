@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const NavLinkItem = ({ to, name }) => {
+const NavItem = ({ to, name }) => {
   return (
     <NavLink
       to={to}
@@ -14,9 +14,9 @@ const NavLinkItem = ({ to, name }) => {
   );
 };
 
-export default NavLinkItem;
+export default NavItem;
 
-NavLinkItem.propTypes = {
+NavItem.propTypes = {
   to: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
