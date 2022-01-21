@@ -52,12 +52,11 @@ const LoginModal = ({ toggleLoginModal, isOpen }) => {
         <Overlay
           onClick={toggleLoginModal}
           customVariants={flyInFromTopVariants}>
-          <Modal
-            onCloseModalClick={toggleLoginModal}
-            className="flex justify-center items-center ">
+          <Modal onCloseModalClick={toggleLoginModal} className="">
+            <h1 className="text-3xl text-center font-bold">Login</h1>
             <form
               onSubmit={onSubmit}
-              className="w-11/12 h-52 flex flex-col justify-between">
+              className="mx-auto w-11/12 h-52 flex flex-col justify-between">
               <LabelInput
                 type="email"
                 placeholder="Email"

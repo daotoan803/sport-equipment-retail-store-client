@@ -21,10 +21,12 @@ const auth = (() => {
   const getRole = () => role;
 
   const logIn = async (email, password) => {
-    const { data, status } = await axios.post('/api/user/signin', {
-      email,
-      password,
-    });
+    const { data, status } = await axios
+      .post('/api/user/signin', {
+        email,
+        password,
+      })
+      .catch((e) => ({ status: e.request.status, data: e.response.data }));
 
     if (status === 200) {
       storeToken(data.token);
